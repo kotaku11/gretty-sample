@@ -8,12 +8,13 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.akhikhl.gretty:gretty:1.1.7-SNAPSHOT'
+        classpath 'org.gretty:gretty:2.1.1-SNAPSHOT'
     }
 }
 
 subprojects {
-    apply plugin: 'org.akhikhl.gretty'
+    apply plugin: 'war'
+    apply plugin: 'org.gretty'
 
     gretty {
         scanInterval = 1 //Scan for changes every second
@@ -23,15 +24,24 @@ subprojects {
         integrationTestTask = 'integrationTest'
     }
 
-    sourceCompatibility = 1.5
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
     version = '1.0'
+
+repositories {
+    maven {
+        url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/'
+    }
+    jcenter()
 }
 
-apply plugin: 'org.akhikhl.gretty'
+}
+
+apply plugin: 'org.gretty'
 
 farm {
-    include ':customer'
-    include ':car'
+    webapp ':customer'
+    webapp ':car'
 }
 
 repositories {
