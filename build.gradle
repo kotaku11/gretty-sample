@@ -1,16 +1,8 @@
-apply plugin: 'java'
-
-buildscript {
-    repositories {
-        maven {
-            url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/'
-        }
-        jcenter()
-    }
-    dependencies {
-        classpath 'org.gretty:gretty:3.0.1'
-    }
+plugins {
+    id 'org.gretty' version '3.0.6'
 }
+
+apply plugin: 'java'
 
 subprojects {
     apply plugin: 'war'
@@ -28,13 +20,9 @@ subprojects {
     targetCompatibility = 1.8
     version = '1.0'
 
-repositories {
-    maven {
-        url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/'
+    repositories {
+        mavenCentral()
     }
-    jcenter()
-}
-
 }
 
 apply plugin: 'org.gretty'
@@ -45,13 +33,9 @@ farm {
 }
 
 repositories {
-    maven {
-        url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/'
-    }
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
-
